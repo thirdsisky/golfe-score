@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/thirdsisky/golfe-score/static/css/main.e6c13ad2.css",
+    "main.js": "/thirdsisky/golfe-score/static/js/main.c773ccb5.js",
+    "static/js/453.7209ff7a.chunk.js": "/thirdsisky/golfe-score/static/js/453.7209ff7a.chunk.js",
+    "index.html": "/thirdsisky/golfe-score/index.html",
+    "main.e6c13ad2.css.map": "/thirdsisky/golfe-score/static/css/main.e6c13ad2.css.map",
+    "main.c773ccb5.js.map": "/thirdsisky/golfe-score/static/js/main.c773ccb5.js.map",
+    "453.7209ff7a.chunk.js.map": "/thirdsisky/golfe-score/static/js/453.7209ff7a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.c773ccb5.js"
+  ]
+}
