@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/golfe-score/static/css/main.e6c13ad2.css",
-    "main.js": "/golfe-score/static/js/main.973c35d8.js",
+    "main.js": "/golfe-score/static/js/main.fb683243.js",
     "static/js/453.7209ff7a.chunk.js": "/golfe-score/static/js/453.7209ff7a.chunk.js",
     "index.html": "/golfe-score/index.html",
     "main.e6c13ad2.css.map": "/golfe-score/static/css/main.e6c13ad2.css.map",
-    "main.973c35d8.js.map": "/golfe-score/static/js/main.973c35d8.js.map",
+    "main.fb683243.js.map": "/golfe-score/static/js/main.fb683243.js.map",
     "453.7209ff7a.chunk.js.map": "/golfe-score/static/js/453.7209ff7a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.973c35d8.js"
+    "static/js/main.fb683243.js"
   ]
 }
