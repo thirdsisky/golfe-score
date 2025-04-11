@@ -42,32 +42,58 @@ function calculateHoleScore(input: HoleInput, birdies: BirdieInput): Record<stri
     });
   });
 
+  // Group into best and second-best by team
+  const bestPlayers: typeof players = [];
+  const secondPlayers: typeof players = [];
+
+  TEAM_NAMES.forEach(team => {
+    const p0 = players.find(p => p.team === team && p.player === 0)!;
+    const p1 = players.find(p => p.team === team && p.player === 1)!;
+
+    if (p0.score <= p1.score) {
+      bestPlayers.push(p0);
+      secondPlayers.push(p1);
+    } else {
+      bestPlayers.push(p1);
+      secondPlayers.push(p0);
+    }
+  });
+
+  // Init result
   const result: Record<string, number> = {};
   players.forEach(p => {
     result[`${p.team}${p.player}`] = 0;
   });
 
-  for (let i = 0; i < players.length; i++) {
-    for (let j = i + 1; j < players.length; j++) {
-      const p1 = players[i];
-      const p2 = players[j];
-      const key1 = `${p1.team}${p1.player}`;
-      const key2 = `${p2.team}${p2.player}`;
+  function compareGroup(group: typeof players) {
+    for (let i = 0; i < group.length; i++) {
+      for (let j = 0; j < group.length; j++) {
+        if (i === j) continue;
 
-      if (p1.team === p2.team) continue;
+        const p1 = group[i];
+        const p2 = group[j];
+        const key1 = `${p1.team}${p1.player}`;
+        const key2 = `${p2.team}${p2.player}`;
 
-      if (p1.score < p2.score) {
-        result[key1] += p1.birdie ? 2 : 1;
-        result[key2] -= p1.birdie ? 2 : 1;
-      } else if (p1.score > p2.score) {
-        result[key2] += p2.birdie ? 2 : 1;
-        result[key1] -= p2.birdie ? 2 : 1;
+        if (p1.score < p2.score) {
+          result[key1] += p1.birdie ? 2 : 1;
+          result[key2] -= p1.birdie ? 2 : 1;
+        } else if (p1.score > p2.score) {
+          result[key2] += p2.birdie ? 2 : 1;
+          result[key1] -= p2.birdie ? 2 : 1;
+        }
+        // If equal, do nothing (draw = 0)
       }
     }
   }
 
+  compareGroup(bestPlayers);
+  compareGroup(secondPlayers);
+
   return result;
 }
+
+
 
 function calculateHoleScoreTurbo(
   input: HoleInput,
@@ -163,20 +189,22 @@ export default function App() {
                 </td>
               ))}
               <td>
-                {[0, 1].map(i => (
-                  <label key={i}>
-                    <input
-                      type="checkbox"
-                      checked={birdies[team][i]}
-                      onChange={e => {
-                        const updated = [...birdies[team]] as [boolean, boolean];
-                        updated[i] = e.target.checked;
-                        setBirdies(prev => ({ ...prev, [team]: updated }));
-                      }}
-                    />
-                  </label>
-                ))}
-              </td>
+                  <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
+                    {[0, 1].map(i => (
+                      <input
+                        key={i}
+                        type="checkbox"
+                        checked={birdies[team][i]}
+                        onChange={e => {
+                          const updated = [...birdies[team]] as [boolean, boolean];
+                          updated[i] = e.target.checked;
+                          setBirdies(prev => ({ ...prev, [team]: updated }));
+                        }}
+                        style={{ width: 18, height: 18 }}
+                      />
+                    ))}
+                  </div>
+                </td>
               <td>
                 <input
                   type="checkbox"
